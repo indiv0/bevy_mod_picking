@@ -40,8 +40,8 @@ struct DebugCursorMesh;
 /// Updates the 3d cursor to be in the pointed world coordinates
 fn update_debug_cursor_position(
     pick_state: Res<PickState>,
-    mut query: Query<With<DebugCursor, &mut Transform>>,
-    mut visibility_query: Query<With<DebugCursorMesh, &mut Draw>>,
+    mut query: Query<&mut Transform, With<DebugCursor>>,
+    mut visibility_query: Query<&mut Draw, With<DebugCursorMesh>>,
 ) {
     // Set the cursor translation to the top pick's world coordinates
     match pick_state.top_all() {
@@ -66,7 +66,7 @@ fn update_debug_cursor_position(
 
 /// Start up system to create 3d Debug cursor
 fn setup_debug_cursor(
-    mut commands: Commands,
+    commands: &mut Commands,
     mut meshes: ResMut<Assets<Mesh>>,
     mut materials: ResMut<Assets<StandardMaterial>>,
 ) {
@@ -80,7 +80,7 @@ fn setup_debug_cursor(
     let ball_size = 0.08;
     commands
         // cursor
-        .spawn(PbrComponents {
+        .spawn(PbrBundle {
             mesh: meshes.add(Mesh::from(shape::Icosphere {
                 subdivisions: 4,
                 radius: ball_size,
@@ -95,7 +95,7 @@ fn setup_debug_cursor(
 
             // child cube
             parent
-                .spawn(PbrComponents {
+                .spawn(PbrBundle {
                     mesh: meshes.add(Mesh::from(shape::Cube { size: cube_size })),
                     material: debug_matl,
                     transform,
