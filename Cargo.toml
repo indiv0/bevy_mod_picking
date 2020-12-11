@@ -12,4 +12,4 @@ categories = ["game-engines", "rendering"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-bevy = { git = "https://github.com/bevyengine/bevy", rev = "4fecb899aaa33cf2ebc42ac94a32d4b5336c6e93", default-features = false, features = ["render"] }
+bevy = { git = "https://github.com/bevyengine/bevy", rev = "1398d7833007e85198cfd35d5fabc70b51b4db31", default-features = false, features = ["render"] }
