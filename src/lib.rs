@@ -358,7 +358,7 @@ fn pick_mesh(
         &GlobalTransform,
         &mut PickableMesh,
         Entity,
-        &Draw,
+        &Visible,
     )>,
 ) {
     // If picking is disabled, do not continue
@@ -376,8 +376,8 @@ fn pick_mesh(
     }
 
     // Iterate through each pickable mesh in the scene
-    for (mesh_handle, transform, mut pickable, entity, draw) in &mut mesh_query.iter_mut() {
-        if !draw.is_visible {
+    for (mesh_handle, transform, mut pickable, entity, visible) in &mut mesh_query.iter_mut() {
+        if !visible.is_visible {
             continue;
         }
 
